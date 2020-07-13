@@ -18,8 +18,17 @@ module.exports = {
                 loader: "babel-loader"
             },
             {
-                test: /\.scss$/,
-                use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+                test: /\.(css|sass|scss)$/,
+                use: [
+                    'style-loader',
+                    'css-loader', 
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                          implementation: require('sass')
+                        }
+                    }
+                ]            
             }
         ]
     },

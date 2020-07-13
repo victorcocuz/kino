@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "public": "dist",
+    "hosting": {
+      "headers": [{
+          "source": "**",
+          "headers": [{
+              "key": "Cache-Control",
+              "value": "max-age=1, s-maxage=1"
+          }]
+      }]
+  },
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
