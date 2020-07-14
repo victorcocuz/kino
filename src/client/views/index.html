@@ -7,30 +7,6 @@
         <title>Kino</title>
     </head>
     <body>
-        <header>
-            <h1>KINO test</h1>
-        </header>
-        <nav>
-            <div class="nav-wrapper container">
-                <ul id="nav-mobile">
-                    <li class="logged-in">
-                        <a href="#" class="modal-trigger modal-button-account" data-target="modal-account">Account</a>
-                    </li>
-                    <li class="logged-in">
-                        <a href="#" id="logout" class="modal-button-logout">Logout</a>
-                    </li>
-                    <li class="logged-in">
-                        <a href="#" class="modal-trigger modal-button-create" data-target="modal-create">Create Guide</a>
-                    </li>
-                    <li class="logged-out">
-                        <a href="#" class="modal-trigger modal-button-login" data-target="modal-login">Login</a>
-                    </li>
-                    <li clas=="logged-out">
-                        <a href="#" class="modal-trigger modal-button-signup" data-traget="modal-signup">Sign Up</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
 
         <!-- SIGN UP MODAL -->
         <div id="modal-signup" class="modal">
@@ -94,6 +70,53 @@
             </div>
         </div>
 
+        <header>
+            <h1>KINO</h1>
+            <nav>
+                <div class="nav-wrapper container">
+                    <ul id="nav-mobile">
+                        <li class="logged-in">
+                            <a href="#" class="modal-trigger modal-button-account" data-target="modal-account">Account</a>
+                        </li>
+                        <li class="logged-in">
+                            <a href="#" id="logout" class="modal-button-logout">Logout</a>
+                        </li>
+                        <li class="logged-in">
+                            <a href="#" class="modal-trigger modal-button-create" data-target="modal-create">Create Guide</a>
+                        </li>
+                        <li class="logged-out">
+                            <a href="#" class="modal-trigger modal-button-login" data-target="modal-login">Login</a>
+                        </li>
+                        <li class="logged-out">
+                            <a href="#" class="modal-trigger modal-button-signup" data-target="modal-signup">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- GUIDE LIST -->
+        <div class="container">
+            <ul>
+                <li>
+                    <div>Guide Title</div>
+                    <div><span>Lorem Ipsum</span></div>
+                </li>
+                <li>
+                    <div>Guide Title</div>
+                    <div><span>Lorem Ipsum</span></div>
+                </li>
+                <li>
+                    <div>Guide Title</div>
+                    <div><span>Lorem Ipsum</span></div>
+                </li>
+                <li>
+                    <div>Guide Title</div>
+                    <div><span>Lorem Ipsum</span></div>
+                </li>
+            </ul>
+        </div>
+
         <main class="content">
             <form id="add-movie-form">
                 <input type="text" name="name" placeholder="Movie Name">
@@ -102,6 +125,9 @@
             </form>
             <ul id="movie-list"></ul>
         </main>
+        <div id="test">
+            {% block whatever %}{% endblock %}
+        </div>
         <footer>
 
         </footer>

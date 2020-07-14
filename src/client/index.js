@@ -14,13 +14,22 @@ form.addEventListener('submit', e => {
 });
 
 // Modals
-const modal_signup = document.querySelector('#modal-signup');
-modal_signup.classList.add("hidden");
-document.querySelector('.modal-button-signup').addEventListener('click', e => {
-    modal_signup.classList.remove("hidden")
+Array.from(document.querySelectorAll('.modal')).forEach(e => {
+    e.addEventListener('click', () => {
+        console.log('modal')
+        e.classList.remove('open')
+    })
+})
+
+Array.from(document.querySelectorAll('.modal-trigger')).forEach(e => {
+    e.addEventListener('click', () => {
+        console.log(e.getAttribute('data-target'))
+        document.querySelector(`#${e.getAttribute('data-target')}`).classList.add('open')
+    })
 })
 
 // CSS Imports
+import 'normalize.css';
 import './styles/main.sass'
 
 // Export js to Client library for output
