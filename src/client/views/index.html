@@ -2,16 +2,98 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-            <!-- Firebase -->
-            <!-- <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Kino</title>
     </head>
     <body>
         <header>
             <h1>KINO test</h1>
         </header>
+        <nav>
+            <div class="nav-wrapper container">
+                <ul id="nav-mobile">
+                    <li class="logged-in">
+                        <a href="#" class="modal-trigger modal-button-account" data-target="modal-account">Account</a>
+                    </li>
+                    <li class="logged-in">
+                        <a href="#" id="logout" class="modal-button-logout">Logout</a>
+                    </li>
+                    <li class="logged-in">
+                        <a href="#" class="modal-trigger modal-button-create" data-target="modal-create">Create Guide</a>
+                    </li>
+                    <li class="logged-out">
+                        <a href="#" class="modal-trigger modal-button-login" data-target="modal-login">Login</a>
+                    </li>
+                    <li clas=="logged-out">
+                        <a href="#" class="modal-trigger modal-button-signup" data-traget="modal-signup">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- SIGN UP MODAL -->
+        <div id="modal-signup" class="modal">
+            <div class="modal-content">
+                <h4>Sign up</h4>
+                <form id="signup-form">
+                    <div class="input-field">
+                        <input type="email" id="signup-email" required />
+                        <label for="signup-email">Email address</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="signup-password" required />
+                        <label for="signup-password">Choose password</label>
+                    </div>
+                    <button>Sign Up</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- LOGIN MODAL -->
+        <div id="modal-login" class="modal">
+            <div class="modal-content">
+                <h4>Login</h4>
+                <form id="login-form">
+                    <div class="input-field">
+                        <input type="email" id="login-email" required />
+                        <label for="login-email">Email address</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="login-password" required />
+                        <label for="login-password">Your password</label>
+                    </div>
+                    <button>Login</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ACCOUNT MODAL -->
+        <div id="modal-account" class="modal">
+            <div class="modal-content">
+                <h4>Account Details</h4>
+                <div class="account-details"></div>
+            </div>
+        </div>
+
+        <!-- CREATE GUIDE MODAL -->
+        <div id="modal-create" class="modal">
+            <div class="modal-content">
+                <h4>Create Guide</h4>
+                <form id="create-form">
+                    <div class="input-field">
+                        <input type="text" id="title" required>
+                        <label for="title">Guide Title</label>
+                    </div>
+                    <div class="input-field">
+                        <textarea id="content" required></textarea>
+                        <label for="content">Guide Content</label>
+                    </div>
+                    <button>Create</button>
+                </form>
+            </div>
+        </div>
+
         <main class="content">
             <form id="add-movie-form">
                 <input type="text" name="name" placeholder="Movie Name">
