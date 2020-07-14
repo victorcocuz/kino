@@ -14,17 +14,17 @@ form.addEventListener('submit', e => {
 });
 
 // Modals
-Array.from(document.querySelectorAll('.modal')).forEach(e => {
-    e.addEventListener('click', () => {
-        console.log('modal')
-        e.classList.remove('open')
+Array.from(document.querySelectorAll('.modal-trigger')).forEach(elem => {
+    elem.addEventListener('click', () => {
+        document.querySelector(`#${elem.getAttribute('data-target')}`).classList.add('open')
     })
 })
 
-Array.from(document.querySelectorAll('.modal-trigger')).forEach(e => {
-    e.addEventListener('click', () => {
-        console.log(e.getAttribute('data-target'))
-        document.querySelector(`#${e.getAttribute('data-target')}`).classList.add('open')
+Array.from(document.querySelectorAll('.modal')).forEach(elem => {
+    elem.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('modal')) {
+            elem.classList.remove('open')
+        }
     })
 })
 
