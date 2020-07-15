@@ -1,7 +1,7 @@
-function helperFunction() {
-    alert('this is a helper')
-    console.log('whatever')
-    return 5
+function capitalize(str, lower=false) {
+  return (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase())
 }
 
-export { helperFunction }
+export { 
+    capitalize
+ }

@@ -75,19 +75,19 @@
             <nav>
                 <div class="nav-wrapper container">
                     <ul id="nav-mobile">
-                        <li class="logged-in">
+                        <li class="logged-in" style="display: none;">
                             <a href="#" class="modal-trigger modal-button-account" data-target="modal-account">Account</a>
                         </li>
-                        <li class="logged-in">
+                        <li class="logged-in" style="display: none;">
                             <a href="#" id="logout" class="modal-button-logout">Logout</a>
                         </li>
-                        <li class="logged-in">
+                        <li class="logged-in" style="display: none;">
                             <a href="#" class="modal-trigger modal-button-create" data-target="modal-create">Create Guide</a>
                         </li>
-                        <li class="logged-out">
+                        <li class="logged-out" style="display: none;">
                             <a href="#" class="modal-trigger modal-button-login" data-target="modal-login">Login</a>
                         </li>
-                        <li class="logged-out">
+                        <li class="logged-out" style="display: none;">
                             <a href="#" class="modal-trigger modal-button-signup" data-target="modal-signup">Sign Up</a>
                         </li>
                     </ul>
@@ -95,9 +95,9 @@
             </nav>
         </header>
 
-        <!-- GUIDE LIST -->
+        <!-- MOVIE LIST -->
         <main class="content">
-            <form id="add-movie-form">
+            <form id="add-movie-form" style="display: none;">
                 <input type="text" name="name" placeholder="Movie Name">
                 <input type="text" name="year" placeholder="Movie Year">
                 <button>Add Movie</button>

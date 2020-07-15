@@ -1,9 +1,7 @@
 /*******************************************************************************************************
-Imports and variables
+IMPORTS AND VARIABLES
 ********************************************************************************************************/
 // Initialize Firebase
-const movieList = document.querySelector('#movie-list');
-
 const fb = require('firebase/app');
 require('firebase/firestore');
 require('firebase/auth')
@@ -23,34 +21,43 @@ fb.initializeApp({
 const db = fb.firestore();
 const auth = fb.auth();
 
+let unsubscribe;
+const movieList = document.querySelector('#movie-list');
+
 
 /*******************************************************************************************************
-Firestore
+FIRESTORE
 ********************************************************************************************************/
 // CREATE - Add a movie to firebase
-function addToFirebase(e, 
-    form) {
-    e.preventDefault();
-    db.collection('movies').add({
-        name: form.name.value,
-        year: parseInt(form.year.value)
+function listenForAddToFirebase() {
+    const form = document.querySelector('#add-movie-form');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        db.collection('movies').add({
+            name: Client.capitalize(form.name.value),
+            year: parseInt(form.year.value)
+        });
+        form.name.value = '';
+        form.year.value = '';
     });
-    form.name.value = '';
-    form.year.value = '';
 };
 
 // READ - Show movies from firebase in realtime using snapshot
 function showMovieList() {
-    db.collection('movies').orderBy('year').onSnapshot(snapshot => {
+    unsubscribe = db.collection('movies').orderBy('year').onSnapshot(snapshot => {
         let changes = snapshot.docChanges();
         changes.forEach(change => {
             if(change.type == 'added'){
-                render_movie(change.doc)
+                renderMovie(change.doc)
             } else if (change.type == 'removed'){
                 movieList.querySelector(`[data-id=${change.doc.id}]`).remove();
             }
         })
     })
+}
+
+function hideMovieList() {
+    movieList.innerHTML = ''
 }
 
 // UPDATE - Append a movie in firebase
@@ -68,7 +75,8 @@ function remove_movie(id) {
 }
 
 // Render movie
-function render_movie(doc) {
+function renderMovie(doc) {
+    const movieList = document.querySelector('#movie-list');
     let li = document.createElement('li');
     let name = document.createElement('span');
     let year = document.createElement('span');
@@ -94,14 +102,18 @@ function render_movie(doc) {
 
 
 /*******************************************************************************************************
-Authentication
+AUTHENTICATION
 ********************************************************************************************************/
 // Listen for auth status changes
 function listenForAuthChanges() {
     auth.onAuthStateChanged(user => {
         if (user) {
+            Client.setupUI(user);
+            showMovieList();
             console.log('User Logged in: ', user)
         } else {
+            Client.setupUI();
+            hideMovieList();
             console.log("User logged out")
         }
     })
@@ -147,17 +159,18 @@ function addSignOutEvent() {
     const logout = document.querySelector('#logout')
     logout.addEventListener('click', evt => {
         evt.preventDefault();
+        unsubscribe();
         auth.signOut();
     })
 }
 
 
 /*******************************************************************************************************
-Exports
+EXPORTS
 ********************************************************************************************************/
 export {
     showMovieList,
-    addToFirebase,
+    listenForAddToFirebase,
     addSignUpEvent,
     addSignOutEvent,
     addLoginEvent,

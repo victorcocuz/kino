@@ -1,35 +1,42 @@
+/*******************************************************************************************************
+IMPORTS AND VARIABLES
+********************************************************************************************************/
 // JS Imports
 import { 
-    showMovieList,
-    addToFirebase,
+    // CRUD
+    // showMovieList,
+    listenForAddToFirebase,
+    // AUTH
     addSignUpEvent,
     addSignOutEvent,
     addLoginEvent,
-    listenForAuthChanges
+    listenForAuthChanges,
 } from './js/firebase'
-import { helperFunction } from './js/helpers'
 
+import {
+    listenForOpenModals,
+    listenForCloseModals
+} from './js/modals'
+
+import { setupUI } from './js/login_components'
+
+import { capitalize } from './js/helpers'
+
+// CSS Imports
+import 'normalize.css';
+import './styles/main.sass'
+
+
+/*******************************************************************************************************
+INITIALIZATIONS
+********************************************************************************************************/
 // CRUD
-showMovieList();
-const form = document.querySelector('#add-movie-form');
-form.addEventListener('submit', e => {
-    addToFirebase(e, form)
-});
+// showMovieList();
+listenForAddToFirebase();
 
 // Modals
-Array.from(document.querySelectorAll('.modal-trigger')).forEach(elem => {
-    elem.addEventListener('click', () => {
-        document.querySelector(`#${elem.getAttribute('data-target')}`).classList.add('open')
-    })
-})
-
-Array.from(document.querySelectorAll('.modal')).forEach(elem => {
-    elem.addEventListener('click', (evt) => {
-        if (evt.target.classList.contains('modal')) {
-            elem.classList.remove('open');
-        }
-    })
-})
+listenForOpenModals();
+listenForCloseModals();
 
 // Auth
 addSignUpEvent();
@@ -37,11 +44,12 @@ addSignOutEvent();
 addLoginEvent();
 listenForAuthChanges();
 
-// CSS Imports
-import 'normalize.css';
-import './styles/main.sass'
 
+/*******************************************************************************************************
+EXPORTS
+********************************************************************************************************/
 // Export js to Client library for output
 export {
-    helperFunction
+    capitalize,
+    setupUI
 }
