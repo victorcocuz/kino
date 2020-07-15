@@ -1,16 +1,19 @@
 // JS Imports
 import { 
-    init_firebase,
-    show_movie_list,
-    add_to_firebase
+    showMovieList,
+    addToFirebase,
+    addSignUpEvent,
+    addSignOutEvent,
+    addLoginEvent,
+    listenForAuthChanges
 } from './js/firebase'
 import { helperFunction } from './js/helpers'
 
 // CRUD
-show_movie_list();
+showMovieList();
 const form = document.querySelector('#add-movie-form');
 form.addEventListener('submit', e => {
-    add_to_firebase(e, form)
+    addToFirebase(e, form)
 });
 
 // Modals
@@ -23,10 +26,16 @@ Array.from(document.querySelectorAll('.modal-trigger')).forEach(elem => {
 Array.from(document.querySelectorAll('.modal')).forEach(elem => {
     elem.addEventListener('click', (evt) => {
         if (evt.target.classList.contains('modal')) {
-            elem.classList.remove('open')
+            elem.classList.remove('open');
         }
     })
 })
+
+// Auth
+addSignUpEvent();
+addSignOutEvent();
+addLoginEvent();
+listenForAuthChanges();
 
 // CSS Imports
 import 'normalize.css';

@@ -30,8 +30,16 @@ module.exports = {
                         }
                     }
                 ]            
+            },
+            {
+                test: /\.js$/,
+                enforce: 'pre',
+                use: ['source-map-loader'],
             }
         ]
+    },
+    stats: {
+        warningsFilter: [/Failed to parse source map/],
     },
     plugins: [
         new HtmlWebpackPlugin({
