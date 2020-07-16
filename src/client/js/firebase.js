@@ -1,10 +1,14 @@
 /*******************************************************************************************************
 IMPORTS AND VARIABLES
 ********************************************************************************************************/
+
+import { setupUserInfo } from './login_components';
+
 // Initialize Firebase
 const fb = require('firebase/app');
 require('firebase/firestore');
-require('firebase/auth')
+require('firebase/auth');
+require('firebase/functions');
 
 fb.initializeApp({
     apiKey: "AIzaSyDR6Y6NThIZWuCVxN1ahUIp2pHV5EHgQ4U",
@@ -20,6 +24,8 @@ fb.initializeApp({
 // Add references to firebase services
 const db = fb.firestore();
 const auth = fb.auth();
+const functions = fb.functions();
+let crtUser = null;
 
 let unsubscribe;
 const movieList = document.querySelector('#movie-list');
@@ -30,15 +36,17 @@ FIRESTORE
 ********************************************************************************************************/
 // CREATE - Add a movie to firebase
 function listenForAddToFirebase() {
-    const form = document.querySelector('#add-movie-form');
-    form.addEventListener('submit', e => {
+    const createForm = document.querySelector('#add-movie-form');
+    createForm.addEventListener('submit', e => {
         e.preventDefault();
         db.collection('movies').add({
-            name: Client.capitalize(form.name.value),
-            year: parseInt(form.year.value)
+            name: Client.capitalize(createForm['movie-name'].value),
+            year: parseInt(createForm['movie-year'].value)
+        }).then(() => {
+            createForm.reset()
+        }).catch(err => {
+            console.log(err.message)
         });
-        form.name.value = '';
-        form.year.value = '';
     });
 };
 
@@ -53,7 +61,9 @@ function showMovieList() {
                 movieList.querySelector(`[data-id=${change.doc.id}]`).remove();
             }
         })
-    })
+    }, err => {
+        console.log(err.message);
+    });
 }
 
 function hideMovieList() {
@@ -108,13 +118,14 @@ AUTHENTICATION
 function listenForAuthChanges() {
     auth.onAuthStateChanged(user => {
         if (user) {
-            Client.setupUI(user);
+            user.getIdTokenResult().then(idTokenResult => {
+                user.admin = idTokenResult.claims.admin;
+                Client.setupUI(user, db);
+            })
             showMovieList();
-            console.log('User Logged in: ', user)
         } else {
             Client.setupUI();
             hideMovieList();
-            console.log("User logged out")
         }
     })
 }
@@ -131,11 +142,21 @@ function addSignUpEvent() {
 
         // Sign Up user
         auth.createUserWithEmailAndPassword(email, password).then(credential => {
+            // Store biography in a new firebase collection
+            crtUser = credential.user
+            return db.collection('users').doc(credential.user.uid).set({
+                bio: signupForm['signup-bio'].value
+            });
+        }).then(() => {
+            Client.setupUserInfo(crtUser, db);
             document.querySelector('#modal-signup').classList.remove('open');
             signupForm.reset();
-        })
-    })
-}
+            signupForm.querySelector('.error').innerHTML = '';
+        }).catch(err => {
+            signupForm.querySelector('.error').innerHTML = err.message;
+        });
+    });
+};
 
 // Log In
 function addLoginEvent() {
@@ -150,9 +171,12 @@ function addLoginEvent() {
         auth.signInWithEmailAndPassword(email, password).then(credential => {
             document.querySelector('#modal-login').classList.remove('open');
             loginForm.reset();
-        })
-    })
-}
+            loginForm.querySelector('.error').innerHTML = '';
+        }).catch(err => {
+            loginForm.querySelector('.error').innerHTML = err.message;
+        });
+    });
+};
 
 // Sign Out
 function addSignOutEvent() {
@@ -163,6 +187,23 @@ function addSignOutEvent() {
         auth.signOut();
     })
 }
+
+
+/*******************************************************************************************************
+FUNCTIONS
+********************************************************************************************************/
+// Add admin cloud function
+const adminForm = document.querySelector('.admin-actions');
+adminForm.addEventListener('submit', evt => {
+    evt.preventDefault();
+    const adminEmail = document.querySelector('#admin-email').value;
+    const addAdminRole = functions.httpsCallable('addAdminRole');
+    addAdminRole({
+        email: adminEmail
+    }).then(result => {
+        console.log(result);
+    });
+})
 
 
 /*******************************************************************************************************

@@ -18,7 +18,10 @@ import {
     listenForCloseModals
 } from './js/modals'
 
-import { setupUI } from './js/login_components'
+import { 
+    setupUI,
+    setupUserInfo 
+} from './js/login_components'
 
 import { capitalize } from './js/helpers'
 
@@ -44,12 +47,12 @@ addSignOutEvent();
 addLoginEvent();
 listenForAuthChanges();
 
-
 /*******************************************************************************************************
 EXPORTS
 ********************************************************************************************************/
 // Export js to Client library for output
 export {
     capitalize,
-    setupUI
+    setupUI,
+    setupUserInfo
 }

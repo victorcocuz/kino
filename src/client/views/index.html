@@ -8,6 +8,9 @@
     </head>
     <body>
 
+<!------------------------------------------------------------------------------------------------------->
+<!-- MODALS -->
+<!------------------------------------------------------------------------------------------------------->
         <!-- SIGN UP MODAL -->
         <div id="modal-signup" class="modal">
             <div class="modal-content">
@@ -21,7 +24,12 @@
                         <input type="password" id="signup-password" required />
                         <label for="signup-password">Choose password</label>
                     </div>
+                    <div class="input-field">
+                        <input type="text" id="signup-bio" required />
+                        <label for="signup-bio">One Line Bio</label>
+                    </div>
                     <button>Sign Up</button>
+                    <p class="error"></p>
                 </form>
             </div>
         </div>
@@ -40,6 +48,7 @@
                         <label for="login-password">Your password</label>
                     </div>
                     <button>Login</button>
+                    <p class="error"></p>
                 </form>
             </div>
         </div>
@@ -70,6 +79,10 @@
             </div>
         </div>
 
+
+<!------------------------------------------------------------------------------------------------------->
+<!-- BODY -->
+<!------------------------------------------------------------------------------------------------------->
         <header>
             <h1>KINO</h1>
             <nav>
@@ -81,7 +94,7 @@
                         <li class="logged-in" style="display: none;">
                             <a href="#" id="logout" class="modal-button-logout">Logout</a>
                         </li>
-                        <li class="logged-in" style="display: none;">
+                        <li class="admin" style="display: none;">
                             <a href="#" class="modal-trigger modal-button-create" data-target="modal-create">Create Guide</a>
                         </li>
                         <li class="logged-out" style="display: none;">
@@ -95,11 +108,16 @@
             </nav>
         </header>
 
+        <form class="admin-actions admin" style="display: none;">
+            <input type="email" placeholder="User email" id="admin-email" required />
+            <button>Make admin</button>
+        </form>
+
         <!-- MOVIE LIST -->
         <main class="content">
             <form id="add-movie-form" style="display: none;">
-                <input type="text" name="name" placeholder="Movie Name">
-                <input type="text" name="year" placeholder="Movie Year">
+                <input type="text" id="movie-name" name="name" placeholder="Movie Name">
+                <input type="text" id="movie-year" name="year" placeholder="Movie Year">
                 <button>Add Movie</button>
             </form>
             <ul id="movie-list"></ul>
