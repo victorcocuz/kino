@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const puppeteer = require('puppeteer');
 // const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin');
 
 module.exports = {
@@ -63,5 +64,9 @@ module.exports = {
         //       }
         //     ]
         // })
-    ]
+    ],
+    externals: {
+        puppeteer: 'require("puppeteer")',
+        // ...
+    },
 }

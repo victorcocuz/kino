@@ -1,6 +1,11 @@
 /*******************************************************************************************************
 IMPORTS AND VARIABLES
 ********************************************************************************************************/
+// Constants
+import {
+    EVENTS
+} from './js/constants'
+
 // JS Imports
 import { 
     // CRUD
@@ -23,6 +28,11 @@ import {
     setupUserInfo 
 } from './js/login_components'
 
+import {
+    getMovies
+} from './js/movie_fetcher'
+
+// Helpers
 import { capitalize } from './js/helpers'
 
 // CSS Imports
@@ -52,7 +62,14 @@ EXPORTS
 ********************************************************************************************************/
 // Export js to Client library for output
 export {
-    capitalize,
+    // Constants
+    EVENTS,
+
+    // Functions
     setupUI,
-    setupUserInfo
+    setupUserInfo,
+    getMovies,
+
+    // Helpers
+    capitalize
 }

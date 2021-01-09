@@ -24,6 +24,7 @@
         "firebase": "^7.15.5",
         "normalize.css": "^8.0.1",
         "nunjucks": "^3.2.1",
+        "puppeteer": "^5.5.0",
         "webpack": "^4.43.0",
         "webpack-cli": "^3.3.12",
         "webpack-dev-server": "^3.11.0"

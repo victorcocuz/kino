@@ -46,8 +46,15 @@ function listenForAddToFirebase() {
             createForm.reset()
         }).catch(err => {
             console.log(err.message)
+            console.log('wtf')
         });
     });
+
+    const fetchForm = document.querySelector('#fetch-movies-form');
+    fetchForm.addEventListener('submit', e => {
+        e.preventDefault();
+        console.log('check')
+    })
 };
 
 // READ - Show movies from firebase in realtime using snapshot
@@ -144,9 +151,10 @@ function addSignUpEvent() {
         auth.createUserWithEmailAndPassword(email, password).then(credential => {
             // Store biography in a new firebase collection
             crtUser = credential.user
-            return db.collection('users').doc(credential.user.uid).set({
-                bio: signupForm['signup-bio'].value
-            });
+            return db.collection('users').doc(credential.user.uid)
+            // .set({
+            //     bio: signupForm['signup-bio'].value
+            // });
         }).then(() => {
             Client.setupUserInfo(crtUser, db);
             document.querySelector('#modal-signup').classList.remove('open');

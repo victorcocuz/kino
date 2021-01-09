@@ -24,10 +24,10 @@
                         <input type="password" id="signup-password" required />
                         <label for="signup-password">Choose password</label>
                     </div>
-                    <div class="input-field">
+                    <!-- <div class="input-field">
                         <input type="text" id="signup-bio" required />
                         <label for="signup-bio">One Line Bio</label>
-                    </div>
+                    </div> -->
                     <button>Sign Up</button>
                     <p class="error"></p>
                 </form>
@@ -119,6 +119,13 @@
                 <input type="text" id="movie-name" name="name" placeholder="Movie Name">
                 <input type="text" id="movie-year" name="year" placeholder="Movie Year">
                 <button>Add Movie</button>
+            </form>
+            <form id="fetch-movies-form" style="display: none;">
+                <input type="text" id="fetch-movie-event-start" name="event-start" placeholder="First Event">
+                <input type="text" id="fetch-movie-event-end" name="event-end" placeholder="Last Event">
+                <input type="text" id="fetch-movie-year-start" name="year-start" placeholder="First Year">
+                <input type="text" id="fetch-movie-year-end" name="year-end" placeholder="Last Event">
+                <button>Fetch Movies</button>
             </form>
             <ul id="movie-list"></ul>
         </main>

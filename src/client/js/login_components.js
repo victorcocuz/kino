@@ -29,10 +29,9 @@ function setupUserInfo(user, db) {
             let user_email = document.createElement('div');
             user_email.textContent = `Logged in as ${user.email}`;
             accountDetails.appendChild(user_email);
-
-            let user_bio = document.createElement('div');
-            user_bio.textContent = `${doc.data().bio}`
-            accountDetails.appendChild(user_bio);
+            // let user_bio = document.createElement('div');
+            // user_bio.textContent = `${doc.data().bio}`
+            // accountDetails.appendChild(user_bio);
 
             let user_admin = document.createElement('div');
             user_admin.textContent = `${user.admin ? 'Admin' : 'Not Admin'}`;
