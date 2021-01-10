@@ -1,6 +1,7 @@
 const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
 const addMovieForm = document.querySelector('#add-movie-form');
+const fetchMoviesForm = document.querySelector('#fetch-movies-form');
 const movieList = document.querySelector('#movie-list');
 const accountDetails = document.querySelector('.account-details');
 const adminItems = document.querySelectorAll('.admin');
@@ -13,12 +14,14 @@ function setupUI(user, db) {
         loggedInLinks.forEach(item => item.style.display = 'block');
         loggedOutLinks.forEach(item => item.style.display = 'none');
         addMovieForm.style.display = 'block';
+        fetchMoviesForm.style.display = 'block'
         setupUserInfo(user, db);
     } else { 
         adminItems.forEach(item => item.style.display = 'none');
         loggedInLinks.forEach(item => item.style.display = 'none');
         loggedOutLinks.forEach(item => item.style.display = 'block');
         addMovieForm.style.display = 'none';
+        fetchMoviesForm.style.display = 'none';
         accountDetails.innerHTML = '';
     }
 }

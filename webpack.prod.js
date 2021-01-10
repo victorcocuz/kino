@@ -8,7 +8,10 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    entry: './src/client/index.js',
+    entry: {
+        polyfill: 'babel-polyfill',
+        app: './src/client/index.js'
+    },
     output: {
         libraryTarget: 'var',
         library: 'Client' // All js is accessible through client library - can be any name.

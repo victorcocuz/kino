@@ -1,15 +1,3 @@
-// Imports
-// const puppeteer = require('puppeteer');
-// const fs = require('fs');
-// const csv = require('fast-csv');
-// const JSONToCSV = require('json2csv').parse;
-// const constants = require('./constants');
-
-// INPUTS
-const START_YEAR = 2020;
-const FINISH_YEAR = 2020;
-const START_ID = '00';
-const FINISH_ID = '00';
 
 // Variables
 let movies = [];
@@ -26,17 +14,18 @@ let imdbLogs = [`***********************************************\nIMDB LOGS\n***
 // });
 
 // Get all movies, given a year interval and a festival index
-async function getMovies(firstYear, lastYear) {
-    const browser = await puppeteer.launch();
-    for (let index = START_ID; index <= FINISH_ID; index++) {
-        for (let year = firstYear; year <= lastYear; year++) {
-            fetchYears.push(fetchYear(browser, Client.EVENTS[Object.keys(Client.EVENTS)[index]], year));
-        }
-        await Promise.all(fetchYears);
-        fetchYears = [];
-    }
-    await browser.close();
+async function getMovies(firstId, lastId, firstYear, lastYear) {
     console.log('this worked')
+    // const browser = await Client.shit.launch();
+    // console.log('this also')
+    // for (let index = firstId; index <= lastId; index++) {
+    //     for (let year = firstYear; year <= lastYear; year++) {
+    //         fetchYears.push(fetchYear(browser, Client.EVENTS[Object.keys(Client.EVENTS)[index]], year));
+    //     }
+    //     await Promise.all(fetchYears);
+    //     fetchYears = [];
+    // }
+    // await browser.close();
 }
 
 // Fetch the movies for a single year

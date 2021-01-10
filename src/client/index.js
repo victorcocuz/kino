@@ -1,6 +1,10 @@
 /*******************************************************************************************************
 IMPORTS AND VARIABLES
 ********************************************************************************************************/
+// Dependencies
+import 'puppeteer'
+import 'jquery'
+const movieList = jQuery('#movie-list');
 // Constants
 import {
     EVENTS
@@ -56,6 +60,7 @@ addSignUpEvent();
 addSignOutEvent();
 addLoginEvent();
 listenForAuthChanges();
+// puppeteer.launch();
 
 /*******************************************************************************************************
 EXPORTS
@@ -71,5 +76,6 @@ export {
     getMovies,
 
     // Helpers
-    capitalize
+    capitalize,
+    // puppeteer
 }

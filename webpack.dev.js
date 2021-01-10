@@ -2,12 +2,15 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer');
 // const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: './src/client/index.js',
+    entry: {
+        polyfill: 'babel-polyfill',
+        app: './src/client/index.js'
+    },
     output: {
         libraryTarget: 'var',
         library: 'Client' // All js is accessible through client library - can be any name.
@@ -56,6 +59,10 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
+        new webpack.ProvidePlugin({
+            puppeteer: 'puppeteer',
+            jQuery: 'jquery'
+        })
         // new NunjucksWebpackPlugin({
         //     templates: [
         //       {
@@ -65,8 +72,8 @@ module.exports = {
         //     ]
         // })
     ],
-    externals: {
-        puppeteer: 'require("puppeteer")',
-        // ...
-    },
+    // externals: {
+    //     puppeteer: require('puppeteer'),
+    //     // ...
+    // },
 }

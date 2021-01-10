@@ -46,14 +46,24 @@ function listenForAddToFirebase() {
             createForm.reset()
         }).catch(err => {
             console.log(err.message)
-            console.log('wtf')
         });
     });
 
     const fetchForm = document.querySelector('#fetch-movies-form');
     fetchForm.addEventListener('submit', e => {
         e.preventDefault();
-        console.log('check')
+        console.log(`
+        ${fetchForm['fetch-movies-event-start'].value},
+        ${fetchForm['fetch-movies-event-end'].value},
+        ${fetchForm['fetch-movies-year-start'].value},
+        ${fetchForm['fetch-movies-year-end'].value}
+        `)
+        Client.getMovies(
+            fetchForm['fetch-movies-event-start'].value,
+            fetchForm['fetch-movies-event-end'].value,
+            fetchForm['fetch-movies-year-start'].value,
+            fetchForm['fetch-movies-year-end'].value
+        );
     })
 };
 
