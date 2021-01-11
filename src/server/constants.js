@@ -15,5 +15,5 @@ const EVENTS = {
 }
 
 module.exports = Object.freeze({
-EVENTS: EVENTS,
+    EVENTS: EVENTS,
 })

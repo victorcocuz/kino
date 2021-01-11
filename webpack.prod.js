@@ -23,6 +23,22 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
+                enforce: 'pre',
+                use: [
+                    { 
+                        loader: 'source-map-loader',
+                        options: {
+                            filterSourceMappingUrl: (url, resourcePath) => {
+                                if (/.*\/node_modules\/.*/.test(resourcePath)) {
+                                    return false
+                                }
+                                return true
+                            }
+                        }
+                    }],
+            },
+            {
+                test: /\.js$/,
                 exclude: /node_modules/,
                 loader: "babel-loader"
             },

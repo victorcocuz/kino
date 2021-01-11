@@ -2,8 +2,6 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const puppeteer = require('puppeteer');
-// const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -59,10 +57,6 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
-        new webpack.ProvidePlugin({
-            puppeteer: 'puppeteer',
-            jQuery: 'jquery'
-        })
         // new NunjucksWebpackPlugin({
         //     templates: [
         //       {
@@ -72,8 +66,4 @@ module.exports = {
         //     ]
         // })
     ],
-    // externals: {
-    //     puppeteer: require('puppeteer'),
-    //     // ...
-    // },
 }

@@ -1,20 +1,16 @@
 /*******************************************************************************************************
 IMPORTS AND VARIABLES
 ********************************************************************************************************/
-// Dependencies
-// import 'puppeteer'
-// import 'jquery'
-// const movieList = jQuery('#movie-list');
 // Constants
 import {
     EVENTS
-} from './js/constants'
+} from '../server/constants'
 
 // JS Imports
 import { 
     // CRUD
-    // showMovieList,
     listenForAddToFirebase,
+
     // AUTH
     addSignUpEvent,
     addSignOutEvent,
@@ -48,7 +44,6 @@ import './styles/main.sass'
 INITIALIZATIONS
 ********************************************************************************************************/
 // CRUD
-// showMovieList();
 listenForAddToFirebase();
 
 // Modals
@@ -60,16 +55,12 @@ addSignUpEvent();
 addSignOutEvent();
 addLoginEvent();
 listenForAuthChanges();
-// puppeteer.launch();
 
 /*******************************************************************************************************
 EXPORTS
 ********************************************************************************************************/
 // Export js to Client library for output
 export {
-    // Constants
-    EVENTS,
-
     // Functions
     setupUI,
     setupUserInfo,
@@ -77,5 +68,4 @@ export {
 
     // Helpers
     capitalize,
-    // puppeteer
 }
