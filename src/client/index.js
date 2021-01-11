@@ -2,9 +2,7 @@
 IMPORTS AND VARIABLES
 ********************************************************************************************************/
 // Constants
-import {
-    EVENTS
-} from '../server/constants'
+const localUrl = `http://localhost:${process.env.PORT}`;
 
 // JS Imports
 import { 
@@ -17,6 +15,10 @@ import {
     addLoginEvent,
     listenForAuthChanges,
 } from './js/firebase'
+
+import {
+    displayMovies
+} from './js/display'
 
 import {
     listenForOpenModals,
@@ -65,7 +67,11 @@ export {
     setupUI,
     setupUserInfo,
     getMovies,
+    displayMovies,
 
     // Helpers
     capitalize,
+
+    // Constants
+    localUrl
 }

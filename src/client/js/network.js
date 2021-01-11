@@ -1,5 +1,4 @@
 const getMovies = async (url, data) => {
-    console.log('getmovies works')
     const response = await fetch(url, {
         method: 'POST',
         headers: {

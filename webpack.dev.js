@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const dotenv = require('dotenv').config()
 
 module.exports = {
     mode: 'development',
@@ -57,6 +58,9 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
+        new webpack.DefinePlugin({
+            "process.env": JSON.stringify(dotenv.parsed)
+        }),
         // new NunjucksWebpackPlugin({
         //     templates: [
         //       {
@@ -66,4 +70,7 @@ module.exports = {
         //     ]
         // })
     ],
+    // proxy: {
+    //     "/getMovies": "http://localhost:3000"
+    //   }
 }
