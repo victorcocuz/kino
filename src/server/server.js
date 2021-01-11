@@ -1,5 +1,6 @@
 // Imports
 const fetch_movies = require('./fetch_movies')
+const path = require('path')
 
 // Setup Express
 const express = require('express')
@@ -14,11 +15,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Create express server
-const PORT = 8081
+const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, '0.0.0.0', () => console.log(`Listening on port ${PORT}`))
 
 // Endpoints
-const path = require('path')
 app.get('/', (req, res) => {
     res.sendFile('dist/index.html') // Generate app home page
 });
