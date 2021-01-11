@@ -50,7 +50,7 @@ function listenForAddToFirebase() {
     });
 
     const fetchForm = document.querySelector('#fetch-movies-form');
-    fetchForm.addEventListener('submit', e => {
+    fetchForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         console.log(`
         ${fetchForm['fetch-movies-event-start'].value},
@@ -58,13 +58,17 @@ function listenForAddToFirebase() {
         ${fetchForm['fetch-movies-year-start'].value},
         ${fetchForm['fetch-movies-year-end'].value}
         `)
-        Client.getMovies(
-            fetchForm['fetch-movies-event-start'].value,
-            fetchForm['fetch-movies-event-end'].value,
-            fetchForm['fetch-movies-year-start'].value,
-            fetchForm['fetch-movies-year-end'].value
-        );
-    })
+        let data = {
+            eventStart: fetchForm['fetch-movies-event-start'].value,
+            eventEnd: fetchForm['fetch-movies-event-end'].value,
+            yearStart: fetchForm['fetch-movies-year-start'].value,
+            yearEnd: fetchForm['fetch-movies-year-end'].value
+        };
+        let movies = await Client.getMovies(`/getMovies`, data);
+        // for (i = 0; i < movies.length; i++) {
+            console.log(movies)
+        // }
+    });
 };
 
 // READ - Show movies from firebase in realtime using snapshot

@@ -2,9 +2,9 @@
 IMPORTS AND VARIABLES
 ********************************************************************************************************/
 // Dependencies
-import 'puppeteer'
-import 'jquery'
-const movieList = jQuery('#movie-list');
+// import 'puppeteer'
+// import 'jquery'
+// const movieList = jQuery('#movie-list');
 // Constants
 import {
     EVENTS
@@ -34,7 +34,7 @@ import {
 
 import {
     getMovies
-} from './js/movie_fetcher'
+} from './js/network'
 
 // Helpers
 import { capitalize } from './js/helpers'
