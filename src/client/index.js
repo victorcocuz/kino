@@ -2,7 +2,8 @@
 IMPORTS AND VARIABLES
 ********************************************************************************************************/
 // Constants
-const localUrl = `http://localhost:${process.env.PORT}`;
+const localUrl = `http://localhost:3000`;
+// const localUrl = `http://localhost:${process.env.PORT}`;
 
 // JS Imports
 import { 

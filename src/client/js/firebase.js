@@ -46,18 +46,18 @@ function listenForAddToFirebase() {
         });
     });
 
-    const fetchForm = document.querySelector('#fetch-movies-form');
-    fetchForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        let data = {
-            eventStart: fetchForm['fetch-movies-event-start'].value,
-            eventEnd: fetchForm['fetch-movies-event-end'].value,
-            yearStart: fetchForm['fetch-movies-year-start'].value,
-            yearEnd: fetchForm['fetch-movies-year-end'].value
-        };
-        let movies = await Client.getMovies(`${Client.localUrl}/getMovies`, data);
-        Client.displayMovies(movies)
-    });
+    // const fetchForm = document.querySelector('#fetch-movies-form');
+    // fetchForm.addEventListener('submit', async (e) => {
+    //     e.preventDefault();
+    //     let data = {
+    //         eventStart: fetchForm['fetch-movies-event-start'].value,
+    //         eventEnd: fetchForm['fetch-movies-event-end'].value,
+    //         yearStart: fetchForm['fetch-movies-year-start'].value,
+    //         yearEnd: fetchForm['fetch-movies-year-end'].value
+    //     };
+    //     let movies = await Client.getMovies(`${Client.localUrl}/getMovies`, data);
+    //     Client.displayMovies(movies)
+    // });
 };
 
 // READ - Show movies from firebase in realtime using snapshot
@@ -215,6 +215,24 @@ adminForm.addEventListener('submit', evt => {
         console.log(result);
     });
 })
+
+const fetchForm = document.querySelector('#fetch-movies-form');
+fetchForm.addEventListener('submit', async (e) => {
+    console.log('this works')
+    // e.preventDefault();
+    // let data = {
+    //     eventStart: fetchForm['fetch-movies-event-start'].value,
+    //     eventEnd: fetchForm['fetch-movies-event-end'].value,
+    //     yearStart: fetchForm['fetch-movies-year-start'].value,
+    //     yearEnd: fetchForm['fetch-movies-year-end'].value
+    // };
+    // // let movies = await Client.getMovies(`${Client.localUrl}/getMovies`, data);
+    // const getMovies = functions.httpsCallable('getMovies');
+    // getMovies(data).then(result => {
+    //     Client.displayMovies(result.data)
+    // });
+
+});
 
 
 /*******************************************************************************************************
