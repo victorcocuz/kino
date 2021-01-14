@@ -1,5 +1,5 @@
 function displayMovies(movies) {
-    console.log('whatever')
+    console.log('this is display')
     console.log(movies)
     // let table = document.querySelector('#movies-table')
     // let keys = Object.keys(movies[0]);

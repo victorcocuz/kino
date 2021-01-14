@@ -218,19 +218,19 @@ adminForm.addEventListener('submit', evt => {
 
 const fetchForm = document.querySelector('#fetch-movies-form');
 fetchForm.addEventListener('submit', async (e) => {
-    console.log('this works')
-    // e.preventDefault();
-    // let data = {
-    //     eventStart: fetchForm['fetch-movies-event-start'].value,
-    //     eventEnd: fetchForm['fetch-movies-event-end'].value,
-    //     yearStart: fetchForm['fetch-movies-year-start'].value,
-    //     yearEnd: fetchForm['fetch-movies-year-end'].value
-    // };
-    // // let movies = await Client.getMovies(`${Client.localUrl}/getMovies`, data);
-    // const getMovies = functions.httpsCallable('getMovies');
-    // getMovies(data).then(result => {
-    //     Client.displayMovies(result.data)
-    // });
+    e.preventDefault();
+    console.log('try')
+    let data = {
+        eventStart: fetchForm['fetch-movies-event-start'].value,
+        eventEnd: fetchForm['fetch-movies-event-end'].value,
+        yearStart: fetchForm['fetch-movies-year-start'].value,
+        yearEnd: fetchForm['fetch-movies-year-end'].value
+    };
+    // let movies = await Client.getMovies(`${Client.localUrl}/getMovies`, data);
+    const fetchMovies = functions.httpsCallable('fetchMovies');
+    fetchMovies(data).then(result => {
+        Client.displayMovies(result.data)
+    });
 
 });
 

@@ -33,7 +33,7 @@ exports.addAdminRole = functions.https.onCall((data, context) => {
 });
 
 // let movies = [];
-exports.fetch_movies = functions.https.onCall((data, context) => {
+exports.fetchMovies = functions.https.onCall((data, context) => {
     // Get all movies, given a year interval and a festival index
     // const browser = await puppeteer.launch();
     // let fetchYears = [];
