@@ -1,4 +1,5 @@
 const getMovies = async (url, data) => {
+    console.log(url)
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -14,5 +15,4 @@ const getMovies = async (url, data) => {
 };
 
 export {
-    getMovies
-}
+    getMovies}

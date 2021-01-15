@@ -219,21 +219,18 @@ adminForm.addEventListener('submit', evt => {
 const fetchForm = document.querySelector('#fetch-movies-form');
 fetchForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    console.log('try')
     let data = {
         eventStart: fetchForm['fetch-movies-event-start'].value,
         eventEnd: fetchForm['fetch-movies-event-end'].value,
         yearStart: fetchForm['fetch-movies-year-start'].value,
         yearEnd: fetchForm['fetch-movies-year-end'].value
     };
-    // let movies = await Client.getMovies(`${Client.localUrl}/getMovies`, data);
-    const fetchMovies = functions.httpsCallable('fetchMovies');
-    fetchMovies(data).then(result => {
-        Client.displayMovies(result.data)
-    });
 
+    let movies = await Client.getMovies(`http://localhost:5001/qp-kino/us-central1/getMovies`, data);
+    Client.displayMovies(movies)
 });
-
+// https://us-central1-qp-kino.cloudfunctions.net/getMovies
+// http://localhost:5001/qp-kino/us-central1/getMovies
 
 /*******************************************************************************************************
 EXPORTS

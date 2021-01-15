@@ -1,10 +1,9 @@
 function displayMovies(movies) {
-    console.log('this is display')
     console.log(movies)
-    // let table = document.querySelector('#movies-table')
-    // let keys = Object.keys(movies[0]);
-    // addTableHead(table, keys);
-    // addTableBody(table, movies);
+    let table = document.querySelector('#movies-table')
+    let keys = Object.keys(movies[0]);
+    addTableHead(table, keys);
+    addTableBody(table, movies);
 }
 
 function addTableHead(table, keys) {

@@ -11,9 +11,10 @@ async function getMovies(firstId, lastId, firstYear, lastYear) {
         for (let year = firstYear; year <= lastYear; year++) {
             fetchYears.push(fetchYear(browser, constants.EVENTS[Object.keys(constants.EVENTS)[index]], year));
         }
-        await Promise.all(fetchYears);
-        fetchYears = [];
     }
+    await Promise.all(fetchYears).catch(error => {
+        console.log(error);
+    });
     await browser.close();
     return movies;
 }
