@@ -9,7 +9,7 @@ async function fetchMovies(data) {
         for (let year = data.yearStart; year <= data.yearEnd; year++) {
             fetchYears.push(() => fetchYear(browser, constants.EVENTS[Object.keys(constants.EVENTS)[index]], year));
         }
-    };
+    }
     const arrayOfPromises = fetchYears.map(fetchYear => fetchYear());
 
     // Run all pages and return results
@@ -17,7 +17,7 @@ async function fetchMovies(data) {
     .then(async responses => {
         let movies = []
         responses.forEach(response => {
-            if (response.status == 'fulfilled') {
+            if (response.status === 'fulfilled') {
                 movies.push(...response.value)
             } else {
                 console.log(response.reason)
@@ -29,7 +29,7 @@ async function fetchMovies(data) {
         await Promise.all(pages.map(page => page.close()));
         await browser.close();
 
-        if (movies.length == 0) {
+        if (movies.length === 0) {
             return {error: '404'}
         }
 
@@ -39,20 +39,24 @@ async function fetchMovies(data) {
 
 // Fetch the movies for a single year
 function fetchYear(browser, event, year) {
-    console.log(`https://www.imdb.com/event/ev${event}/${year}/1/`);
     return new Promise(async (resolve, reject) => {
+        console.log(`https://www.imdb.com/event/ev${event}/${year}/1/`);
         let movies = []
         try {
             // Create a new page, load it and check response
             let responseStatus = -1;
+            console.log('try')
             const page = await browser.newPage();
             page.on('response', response => {responseStatus = response.status()});
+            console.log('add listener')
             await page.goto(`https://www.imdb.com/event/ev${event}/${year}/1/`, { waituntil: 'load', timeout: 0});
-
+            console.log('goto page')
             // If response is successful fetch movies
             if (200 <= responseStatus && responseStatus < 300) {
+                console.log('check respons')
                 // Push returned object into the movies array
                 movies = await page.evaluate(async (event, year) => {
+                    console.log('evaluate')
                     let moviesSingleYear = [];
                     let entryEventName = document.querySelector('.event-header__title').innerText.split(',')[0];
             
@@ -60,6 +64,7 @@ function fetchYear(browser, event, year) {
                     let awards = document.querySelectorAll('.event-widgets__award');
                     let awardCount = 0
                     awards.forEach(award => {
+                        console.log('awards')
                         awardCount += 1
                         entryAwardName = award.querySelector('.event-widgets__award-name').innerText;
                         
@@ -153,7 +158,7 @@ function fetchYear(browser, event, year) {
                 }, event, year);
                 resolve(movies)
             } else {
-                reject(`REJECTION: https://www.imdb.com/event/ev${event}/${year}/1/ has status ${responseStatus}`);
+                reject(new Error(`REJECTION: https://www.imdb.com/event/ev${event}/${year}/1/ has status ${responseStatus}`));
             }
         } catch (err) {
             console.log(err);

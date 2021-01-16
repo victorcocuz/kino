@@ -219,6 +219,7 @@ adminForm.addEventListener('submit', evt => {
 const fetchForm = document.querySelector('#fetch-movies-form');
 fetchForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    console.log('whatever')
     let data = {
         eventStart: fetchForm['fetch-movies-event-start'].value,
         eventEnd: fetchForm['fetch-movies-event-end'].value,
@@ -226,9 +227,15 @@ fetchForm.addEventListener('submit', async (e) => {
         yearEnd: fetchForm['fetch-movies-year-end'].value
     };
 
-    await Client.getMovies(`http://localhost:5001/qp-kino/us-central1/getMovies`, data).then(movies => {
+    await Client.getMovies(`https://us-central1-qp-kino.cloudfunctions.net/getMovies`, data).then(movies => {
         Client.displayMovies(movies)
     })
+    // const getMoviesTwo = functions.httpsCallable('getMoviesTwo')
+    // getMoviesTwo(data)
+    // .then(movies => {
+    //     // Client.displayMovies(movies)
+    //     console.log(movies)
+    // })
 
 });
 // https://us-central1-qp-kino.cloudfunctions.net/getMovies
