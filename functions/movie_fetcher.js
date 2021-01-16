@@ -1,9 +1,14 @@
 const constants = require('./constants');
 const puppeteer = require('puppeteer');
+let browserPromise = puppeteer.launch({
+    args: [
+        '--no-sandbox'
+    ]
+});
 
 async function fetchMovies(data) {
     // Create array of promises
-    const browser = await puppeteer.launch();
+    let browser = await browserPromise
     const fetchYears = [];
     for (let index = data.eventStart; index <= data.eventEnd; index++) {
         for (let year = data.yearStart; year <= data.yearEnd; year++) {
@@ -24,10 +29,9 @@ async function fetchMovies(data) {
             }
         });
 
-        // Close pages and browser
+        // Close pages
         let pages = await browser.pages();
         await Promise.all(pages.map(page => page.close()));
-        await browser.close();
 
         if (movies.length === 0) {
             return {error: '404'}
@@ -41,22 +45,17 @@ async function fetchMovies(data) {
 function fetchYear(browser, event, year) {
     return new Promise(async (resolve, reject) => {
         console.log(`https://www.imdb.com/event/ev${event}/${year}/1/`);
-        let movies = []
+        let movies = [];
         try {
             // Create a new page, load it and check response
             let responseStatus = -1;
-            console.log('try')
             const page = await browser.newPage();
             page.on('response', response => {responseStatus = response.status()});
-            console.log('add listener')
             await page.goto(`https://www.imdb.com/event/ev${event}/${year}/1/`, { waituntil: 'load', timeout: 0});
-            console.log('goto page')
             // If response is successful fetch movies
             if (200 <= responseStatus && responseStatus < 300) {
-                console.log('check respons')
                 // Push returned object into the movies array
                 movies = await page.evaluate(async (event, year) => {
-                    console.log('evaluate')
                     let moviesSingleYear = [];
                     let entryEventName = document.querySelector('.event-header__title').innerText.split(',')[0];
             
@@ -64,7 +63,6 @@ function fetchYear(browser, event, year) {
                     let awards = document.querySelectorAll('.event-widgets__award');
                     let awardCount = 0
                     awards.forEach(award => {
-                        console.log('awards')
                         awardCount += 1
                         entryAwardName = award.querySelector('.event-widgets__award-name').innerText;
                         

@@ -230,13 +230,6 @@ fetchForm.addEventListener('submit', async (e) => {
     await Client.getMovies(`https://us-central1-qp-kino.cloudfunctions.net/getMovies`, data).then(movies => {
         Client.displayMovies(movies)
     })
-    // const getMoviesTwo = functions.httpsCallable('getMoviesTwo')
-    // getMoviesTwo(data)
-    // .then(movies => {
-    //     // Client.displayMovies(movies)
-    //     console.log(movies)
-    // })
-
 });
 // https://us-central1-qp-kino.cloudfunctions.net/getMovies
 // http://localhost:5001/qp-kino/us-central1/getMovies

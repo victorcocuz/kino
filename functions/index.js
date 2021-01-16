@@ -3,7 +3,7 @@ const cors = require('cors')({origin: true});
 const movie_fetcher = require('./movie_fetcher');
 
 const runtimeOpts = {
-    timeoutSeconds: 30,
+    timeoutSeconds: 300,
     memory: '2GB'
   }
 
@@ -35,10 +35,8 @@ exports.getMovies = functions
 .runWith(runtimeOpts)
 .https.onRequest((req, res) => {
     cors(req, res, async () => {  
-        console.log('cors begin')
         const data = req.body.data
         await movie_fetcher.fetchMovies(data).then(movies => {
-            console.log('cors await')
             if (movies.error) {
                 return res.status(404).send({error: 'Error 404, no movies'});
             } else {
@@ -47,21 +45,3 @@ exports.getMovies = functions
         })
     });
 });
-
-// exports.getMoviesTwo = functions
-// .runWith(runtimeOpts)
-// .https.onCall(async (data, context) => {
-//     // let res = []
-//     // return cors(req, res, async () => {  
-//         console.log('log this')
-//         // const data = data
-//         await movie_fetcher.fetchMovies(data).then(movies => {
-//             if (movies.error) {
-//                 return res.status(404).send({error: 'Error 404, no movies'});
-//             } else {
-//                 return res.status(200).send(movies);
-//             }
-//         })
-//     return 'strange'
-    // });
-// });
