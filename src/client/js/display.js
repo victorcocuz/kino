@@ -1,5 +1,8 @@
 function displayMovies(movies) {
     console.log(movies)
+    if (movies.error) {
+        return;
+    }
     let table = document.querySelector('#movies-table')
     let keys = Object.keys(movies[0]);
     addTableHead(table, keys);

@@ -226,8 +226,10 @@ fetchForm.addEventListener('submit', async (e) => {
         yearEnd: fetchForm['fetch-movies-year-end'].value
     };
 
-    let movies = await Client.getMovies(`http://localhost:5001/qp-kino/us-central1/getMovies`, data);
-    Client.displayMovies(movies)
+    await Client.getMovies(`http://localhost:5001/qp-kino/us-central1/getMovies`, data).then(movies => {
+        Client.displayMovies(movies)
+    })
+
 });
 // https://us-central1-qp-kino.cloudfunctions.net/getMovies
 // http://localhost:5001/qp-kino/us-central1/getMovies
